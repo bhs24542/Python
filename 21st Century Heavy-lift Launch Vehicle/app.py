@@ -1,7 +1,7 @@
 #docstring - 21st Century Heavy-lift Launch Vehicle Database Application
 #Import database
 import sqlite3
-DATABASE = 'rockets.db'
+DATABASE = "rockets.db"
 
 #Function 1
 def print_all_rockets():
@@ -150,3 +150,33 @@ def search_rockets_by_min_payload():
             print(f"{rocket[0]:<25}{rocket[1]:<10}")
         #loop finish
     db.close()
+
+#main code
+while True:
+    user_input = input("""
+What would you like to do.
+1.Print all rockets with their organizations
+2.Print all rockets sorted by first launch year (Newest to Oldest)
+3.Print all rockets sorted by LEO payload (Largest to Smallest)
+4.Filter rockets by status (Operational / Retired)
+5.Search rockets by country
+6.Search rockets above specific LEO payload
+7.Exit.
+""")
+    
+    if user_input == "1":
+        print_all_rockets()
+    elif user_input == "2":
+        print_rockets_by_year()
+    elif user_input == "3":
+        print_rockets_by_payload()
+    elif user_input == "4":
+        filter_rockets_by_status()
+    elif user_input == "5":
+        search_rockets_by_country()
+    elif user_input == "6":
+        search_rockets_by_min_payload()
+    elif user_input == "7":
+        break
+    else:
+        print("That was not an option!\n")
