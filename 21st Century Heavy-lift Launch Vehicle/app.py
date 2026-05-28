@@ -8,11 +8,9 @@ def print_all_rockets():
     #Print all the rockets with organizations and nationality
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT Rockets.rocket_name, Organizations.org_name, Organizations.nationality 
-    FROM Rockets 
-    JOIN Organizations ON Rockets.org_id = Organizations.org_id;
-    """
+    sql = "SELECT Rockets.rocket_name, Organizations.org_name, Organizations.nationality FROM Rockets JOIN Organizations ON Rockets.org_id = Organizations.org_id;"
+    cursor.execute(sql)
+    cursor.execute(sql)
     cursor.execute(sql)
     results = cursor.fetchall()
     #loop through all the results
@@ -27,11 +25,7 @@ def print_rockets_by_year():
     #Print rockets sorted by first launch year (from newest to oldest)
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT rocket_name, first_launch_year 
-    FROM Rockets 
-    ORDER BY first_launch_year DESC;
-    """
+    sql = "SELECT rocket_name, first_launch_year FROM Rockets ORDER BY first_launch_year DESC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     #loop through all the results
@@ -46,11 +40,7 @@ def print_rockets_by_payload():
     #Print rockets sorted by LEO payload (from largest to smallest)
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT rocket_name, leo_payload_kg 
-    FROM Rockets 
-    ORDER BY leo_payload_kg DESC;
-    """
+    sql = "SELECT rocket_name, leo_payload_kg FROM Rockets ORDER BY leo_payload_kg DESC;"
     cursor.execute(sql)
     results = cursor.fetchall()
     #loop through all the results
@@ -72,11 +62,7 @@ def filter_rockets_by_status():
 
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT rocket_name, status 
-    FROM Rockets 
-    WHERE status = ?;
-    """
+    sql = "SELECT rocket_name, status FROM Rockets WHERE status = ?;"
     cursor.execute(sql, (user_input,))
     results = cursor.fetchall()
     
@@ -98,18 +84,13 @@ def search_rockets_by_country():
     
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT Rockets.rocket_name, Organizations.nationality 
-    FROM Rockets 
-    JOIN Organizations ON Rockets.org_id = Organizations.org_id 
-    WHERE Organizations.nationality = ?;
-    """
+    sql = "SELECT Rockets.rocket_name, Organizations.nationality FROM Rockets JOIN Organizations ON Rockets.org_id = Organizations.org_id WHERE Organizations.nationality = ?;"
     cursor.execute(sql, (user_input,))
     results = cursor.fetchall()
     
     #check if results exist
     if not results:
-        print(f"No rockets found from country: {user_input}\n")
+        print(f"No rockets found from {user_input}\n")
     else:
         #loop through all the results
         print(f"rocket_name              nationality")
@@ -127,16 +108,12 @@ def search_rockets_by_min_payload():
     try:
         min_payload = int(user_input)
     except ValueError:
-        print("That was not a valid number.\n")
+        print("That is not a valid number.\n")
         return
 
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = """
-    SELECT rocket_name, leo_payload_kg 
-    FROM Rockets 
-    WHERE leo_payload_kg >= ?;
-    """
+    sql = "SELECT rocket_name, leo_payload_kg FROM Rockets WHERE leo_payload_kg >= ?;"
     cursor.execute(sql, (min_payload,))
     results = cursor.fetchall()
     
@@ -179,4 +156,4 @@ What would you like to do.
     elif user_input == "7":
         break
     else:
-        print("That was not an option!\n")
+        print("That is not an option!\n")
