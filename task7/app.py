@@ -3,7 +3,7 @@
 import sqlite3
 
 #contants and variables
-DATABASE = 'fighter.db'
+DATABASE = "fighter.db"
 
 
 #functions
