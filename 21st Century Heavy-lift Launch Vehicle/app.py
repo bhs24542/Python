@@ -89,7 +89,7 @@ def search_rockets_by_min_payload():
 
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT rocket_name, leo_payload_kg FROM Rockets WHERE leo_payload_kg >= ?;"
+    sql = "SELECT rocket_name, leo_payload_kg FROM Rockets WHERE leo_payload_kg >= ? ORDER BY leo_payload_kg DESC;"
     cursor.execute(sql, (min_payload,))
     results = cursor.fetchall()
     
@@ -107,7 +107,7 @@ def search_rockets_by_min_payload():
 #main code
 while True:
     user_input = input("""
-What would you like to do.
+What would you like to do?
 1.Print all rockets with their organizations
 2.Print all rockets sorted by first launch year (Newest to Oldest)
 3.Print all rockets sorted by LEO payload (Largest to Smallest)
