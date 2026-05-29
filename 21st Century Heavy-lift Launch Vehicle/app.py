@@ -10,8 +10,6 @@ def print_all_rockets():
     cursor = db.cursor()
     sql = "SELECT Rockets.rocket_name, Organizations.org_name, Organizations.nationality FROM Rockets JOIN Organizations ON Rockets.org_id = Organizations.org_id;"
     cursor.execute(sql)
-    cursor.execute(sql)
-    cursor.execute(sql)
     results = cursor.fetchall()
     #loop through all the results
     print(f"rocket_name              organization        nationality")
@@ -53,7 +51,7 @@ def print_rockets_by_payload():
 #Function 4
 def filter_rockets_by_status():
     #Filter and print rockets by user defined status
-    user_input = input("Enter status (Operational/Retired): ").strip()
+    user_input = input("Enter status (Operational/Retired): ").strip().capitalize()
     
     #input validation
     if user_input not in ["Operational", "Retired"]:
@@ -78,28 +76,6 @@ def filter_rockets_by_status():
     db.close()
 
 #Function 5
-def search_rockets_by_country():
-    #Filter and print rockets by user defined nationality
-    user_input = input("Enter country name (e.g., USA, China): ").strip()
-    
-    db = sqlite3.connect(DATABASE)
-    cursor = db.cursor()
-    sql = "SELECT Rockets.rocket_name, Organizations.nationality FROM Rockets JOIN Organizations ON Rockets.org_id = Organizations.org_id WHERE Organizations.nationality = ?;"
-    cursor.execute(sql, (user_input,))
-    results = cursor.fetchall()
-    
-    #check if results exist
-    if not results:
-        print(f"No rockets found from {user_input}. \n")
-    else:
-        #loop through all the results
-        print(f"rocket_name              nationality")
-        for rocket in results:
-            print(f"{rocket[0]:<25}{rocket[1]:<15}")
-        #loop finish
-    db.close()
-
-#Function 6
 def search_rockets_by_min_payload():
     #Print rockets above a user defined specific LEO payload
     user_input = input("Enter minimum LEO payload (in integer, unit: kilograms): ").strip()
@@ -136,9 +112,8 @@ What would you like to do.
 2.Print all rockets sorted by first launch year (Newest to Oldest)
 3.Print all rockets sorted by LEO payload (Largest to Smallest)
 4.Filter rockets by status (Operational / Retired)
-5.Search rockets by country
-6.Search rockets above specific LEO payload
-7.Exit.
+5.Search rockets above specific LEO payload
+6.Exit.
 """)
     
     if user_input == "1":
@@ -150,10 +125,8 @@ What would you like to do.
     elif user_input == "4":
         filter_rockets_by_status()
     elif user_input == "5":
-        search_rockets_by_country()
-    elif user_input == "6":
         search_rockets_by_min_payload()
-    elif user_input == "7":
+    elif user_input == "6":
         break
     else:
         print("That is not an option!\n")
