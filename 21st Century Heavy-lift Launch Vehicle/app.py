@@ -80,7 +80,7 @@ def filter_rockets_by_status():
 #Function 5
 def search_rockets_by_country():
     #Filter and print rockets by user defined nationality
-    user_input = input("Enter country name (e.g., United States, China): ").strip()
+    user_input = input("Enter country name (e.g., USA, China): ").strip()
     
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
@@ -90,7 +90,7 @@ def search_rockets_by_country():
     
     #check if results exist
     if not results:
-        print(f"No rockets found from {user_input}\n")
+        print(f"No rockets found from {user_input}. \n")
     else:
         #loop through all the results
         print(f"rocket_name              nationality")
