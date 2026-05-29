@@ -93,7 +93,7 @@ def search_rockets_by_min_payload():
     cursor.execute(sql, (min_payload,))
     results = cursor.fetchall()
     
-    # check if results exist
+    #check if results exist
     if not results:
         print(f"No rockets found with payload >= {min_payload} kg.\n")
     else:
