@@ -16,5 +16,11 @@
     text-align: center;
     top: 280px;
     width: 100%;
-    font-size: 2rem;
+    font-size: 4rem;
+}
+
+.two-column{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
 }
