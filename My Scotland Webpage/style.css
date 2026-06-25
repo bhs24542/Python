@@ -26,7 +26,7 @@ img{
 
 .two-column{
     display: grid;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: 1fr 3fr;
     gap: 50px;
     width: 80%;
     margin: auto;
